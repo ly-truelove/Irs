@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.PinfoMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Pinfo" >
+    <id column="iid" property="iid" jdbcType="INTEGER" />
+    <result column="x" property="x" jdbcType="DOUBLE" />
+    <result column="y" property="y" jdbcType="DOUBLE" />
+    <result column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="projrampath" property="projrampath" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
+    <result column="totalclassid" property="totalclassid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    iid, x, y, rid, fid, projrampath, state, creattime, totalclassid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pinfo
+    where iid = #{iid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pinfo
+    where iid = #{iid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Pinfo" >
+    insert into pinfo (iid, x, y, rid, 
+      fid, projrampath, state, 
+      creattime, totalclassid)
+    values (#{iid,jdbcType=INTEGER}, #{x,jdbcType=DOUBLE}, #{y,jdbcType=DOUBLE}, #{rid,jdbcType=INTEGER}, 
+      #{fid,jdbcType=INTEGER}, #{projrampath,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, 
+      #{creattime,jdbcType=TIMESTAMP}, #{totalclassid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Pinfo" >
+    insert into pinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        iid,
+      </if>
+      <if test="x != null" >
+        x,
+      </if>
+      <if test="y != null" >
+        y,
+      </if>
+      <if test="rid != null" >
+        rid,
+      </if>
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="projrampath != null" >
+        projrampath,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="creattime != null" >
+        creattime,
+      </if>
+      <if test="totalclassid != null" >
+        totalclassid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        #{iid,jdbcType=INTEGER},
+      </if>
+      <if test="x != null" >
+        #{x,jdbcType=DOUBLE},
+      </if>
+      <if test="y != null" >
+        #{y,jdbcType=DOUBLE},
+      </if>
+      <if test="rid != null" >
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="projrampath != null" >
+        #{projrampath,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="creattime != null" >
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalclassid != null" >
+        #{totalclassid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Pinfo" >
+    update pinfo
+    <set >
+      <if test="x != null" >
+        x = #{x,jdbcType=DOUBLE},
+      </if>
+      <if test="y != null" >
+        y = #{y,jdbcType=DOUBLE},
+      </if>
+      <if test="rid != null" >
+        rid = #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="fid != null" >
+        fid = #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="projrampath != null" >
+        projrampath = #{projrampath,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="creattime != null" >
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalclassid != null" >
+        totalclassid = #{totalclassid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where iid = #{iid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Pinfo" >
+    update pinfo
+    set x = #{x,jdbcType=DOUBLE},
+      y = #{y,jdbcType=DOUBLE},
+      rid = #{rid,jdbcType=INTEGER},
+      fid = #{fid,jdbcType=INTEGER},
+      projrampath = #{projrampath,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER},
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      totalclassid = #{totalclassid,jdbcType=INTEGER}
+    where iid = #{iid,jdbcType=INTEGER}
+  </update>
+</mapper>

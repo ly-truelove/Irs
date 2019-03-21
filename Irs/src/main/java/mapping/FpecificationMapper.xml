@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.FpecificationMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Fpecification" >
+    <id column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="viewcount" property="viewcount" jdbcType="INTEGER" />
+    <result column="duration" property="duration" jdbcType="TIME" />
+    <result column="starttime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="stopTime" property="stoptime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fid, viewcount, duration, starttime, stopTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fpecification
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fpecification
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Fpecification" >
+    insert into fpecification (fid, viewcount, duration, 
+      starttime, stopTime)
+    values (#{fid,jdbcType=INTEGER}, #{viewcount,jdbcType=INTEGER}, #{duration,jdbcType=TIME}, 
+      #{starttime,jdbcType=TIMESTAMP}, #{stoptime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Fpecification" >
+    insert into fpecification
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="viewcount != null" >
+        viewcount,
+      </if>
+      <if test="duration != null" >
+        duration,
+      </if>
+      <if test="starttime != null" >
+        starttime,
+      </if>
+      <if test="stoptime != null" >
+        stopTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="viewcount != null" >
+        #{viewcount,jdbcType=INTEGER},
+      </if>
+      <if test="duration != null" >
+        #{duration,jdbcType=TIME},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stoptime != null" >
+        #{stoptime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Fpecification" >
+    update fpecification
+    <set >
+      <if test="viewcount != null" >
+        viewcount = #{viewcount,jdbcType=INTEGER},
+      </if>
+      <if test="duration != null" >
+        duration = #{duration,jdbcType=TIME},
+      </if>
+      <if test="starttime != null" >
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stoptime != null" >
+        stopTime = #{stoptime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Fpecification" >
+    update fpecification
+    set viewcount = #{viewcount,jdbcType=INTEGER},
+      duration = #{duration,jdbcType=TIME},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      stopTime = #{stoptime,jdbcType=TIMESTAMP}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>

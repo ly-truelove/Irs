@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.TerminalinfoMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Terminalinfo" >
+    <id column="tiid" property="tiid" jdbcType="INTEGER" />
+    <result column="connecttime" property="connecttime" jdbcType="INTEGER" />
+    <result column="volume" property="volume" jdbcType="INTEGER" />
+    <result column="maximum" property="maximum" jdbcType="DOUBLE" />
+    <result column="onlinetime" property="onlinetime" jdbcType="TIME" />
+    <result column="tvid" property="tvid" jdbcType="INTEGER" />
+    <result column="context" property="context" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tiid, connecttime, volume, maximum, onlinetime, tvid, context
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from terminalinfo
+    where tiid = #{tiid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from terminalinfo
+    where tiid = #{tiid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Terminalinfo" >
+    insert into terminalinfo (tiid, connecttime, volume, 
+      maximum, onlinetime, tvid, 
+      context)
+    values (#{tiid,jdbcType=INTEGER}, #{connecttime,jdbcType=INTEGER}, #{volume,jdbcType=INTEGER}, 
+      #{maximum,jdbcType=DOUBLE}, #{onlinetime,jdbcType=TIME}, #{tvid,jdbcType=INTEGER}, 
+      #{context,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Terminalinfo" >
+    insert into terminalinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tiid != null" >
+        tiid,
+      </if>
+      <if test="connecttime != null" >
+        connecttime,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+      <if test="maximum != null" >
+        maximum,
+      </if>
+      <if test="onlinetime != null" >
+        onlinetime,
+      </if>
+      <if test="tvid != null" >
+        tvid,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tiid != null" >
+        #{tiid,jdbcType=INTEGER},
+      </if>
+      <if test="connecttime != null" >
+        #{connecttime,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=INTEGER},
+      </if>
+      <if test="maximum != null" >
+        #{maximum,jdbcType=DOUBLE},
+      </if>
+      <if test="onlinetime != null" >
+        #{onlinetime,jdbcType=TIME},
+      </if>
+      <if test="tvid != null" >
+        #{tvid,jdbcType=INTEGER},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Terminalinfo" >
+    update terminalinfo
+    <set >
+      <if test="connecttime != null" >
+        connecttime = #{connecttime,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null" >
+        volume = #{volume,jdbcType=INTEGER},
+      </if>
+      <if test="maximum != null" >
+        maximum = #{maximum,jdbcType=DOUBLE},
+      </if>
+      <if test="onlinetime != null" >
+        onlinetime = #{onlinetime,jdbcType=TIME},
+      </if>
+      <if test="tvid != null" >
+        tvid = #{tvid,jdbcType=INTEGER},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tiid = #{tiid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Terminalinfo" >
+    update terminalinfo
+    set connecttime = #{connecttime,jdbcType=INTEGER},
+      volume = #{volume,jdbcType=INTEGER},
+      maximum = #{maximum,jdbcType=DOUBLE},
+      onlinetime = #{onlinetime,jdbcType=TIME},
+      tvid = #{tvid,jdbcType=INTEGER},
+      context = #{context,jdbcType=VARCHAR}
+    where tiid = #{tiid,jdbcType=INTEGER}
+  </update>
+</mapper>

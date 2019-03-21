@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.TerminalversionsMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Terminalversions" >
+    <id column="tvid" property="tvid" jdbcType="INTEGER" />
+    <result column="vernumber" property="vernumber" jdbcType="VARCHAR" />
+    <result column="downlink" property="downlink" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="pojo.Terminalversions" extends="BaseResultMap" >
+    <result column="context" property="context" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    tvid, vernumber, downlink
+  </sql>
+  <sql id="Blob_Column_List" >
+    context
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from terminalversions
+    where tvid = #{tvid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from terminalversions
+    where tvid = #{tvid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Terminalversions" >
+    insert into terminalversions (tvid, vernumber, downlink, 
+      context)
+    values (#{tvid,jdbcType=INTEGER}, #{vernumber,jdbcType=VARCHAR}, #{downlink,jdbcType=VARCHAR}, 
+      #{context,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Terminalversions" >
+    insert into terminalversions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tvid != null" >
+        tvid,
+      </if>
+      <if test="vernumber != null" >
+        vernumber,
+      </if>
+      <if test="downlink != null" >
+        downlink,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tvid != null" >
+        #{tvid,jdbcType=INTEGER},
+      </if>
+      <if test="vernumber != null" >
+        #{vernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="downlink != null" >
+        #{downlink,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Terminalversions" >
+    update terminalversions
+    <set >
+      <if test="vernumber != null" >
+        vernumber = #{vernumber,jdbcType=VARCHAR},
+      </if>
+      <if test="downlink != null" >
+        downlink = #{downlink,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where tvid = #{tvid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="pojo.Terminalversions" >
+    update terminalversions
+    set vernumber = #{vernumber,jdbcType=VARCHAR},
+      downlink = #{downlink,jdbcType=VARCHAR},
+      context = #{context,jdbcType=LONGVARCHAR}
+    where tvid = #{tvid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Terminalversions" >
+    update terminalversions
+    set vernumber = #{vernumber,jdbcType=VARCHAR},
+      downlink = #{downlink,jdbcType=VARCHAR}
+    where tvid = #{tvid,jdbcType=INTEGER}
+  </update>
+</mapper>

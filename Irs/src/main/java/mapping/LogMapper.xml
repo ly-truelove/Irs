@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.LogMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Log" >
+    <id column="logid" property="logid" jdbcType="INTEGER" />
+    <result column="logcontext" property="logcontext" jdbcType="VARCHAR" />
+    <result column="operationtime" property="operationtime" jdbcType="TIMESTAMP" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    logid, logcontext, operationtime, username, result
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from log
+    where logid = #{logid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log
+    where logid = #{logid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Log" >
+    insert into log (logid, logcontext, operationtime, 
+      username, result)
+    values (#{logid,jdbcType=INTEGER}, #{logcontext,jdbcType=VARCHAR}, #{operationtime,jdbcType=TIMESTAMP}, 
+      #{username,jdbcType=VARCHAR}, #{result,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Log" >
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        logid,
+      </if>
+      <if test="logcontext != null" >
+        logcontext,
+      </if>
+      <if test="operationtime != null" >
+        operationtime,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        #{logid,jdbcType=INTEGER},
+      </if>
+      <if test="logcontext != null" >
+        #{logcontext,jdbcType=VARCHAR},
+      </if>
+      <if test="operationtime != null" >
+        #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Log" >
+    update log
+    <set >
+      <if test="logcontext != null" >
+        logcontext = #{logcontext,jdbcType=VARCHAR},
+      </if>
+      <if test="operationtime != null" >
+        operationtime = #{operationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=INTEGER},
+      </if>
+    </set>
+    where logid = #{logid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Log" >
+    update log
+    set logcontext = #{logcontext,jdbcType=VARCHAR},
+      operationtime = #{operationtime,jdbcType=TIMESTAMP},
+      username = #{username,jdbcType=VARCHAR},
+      result = #{result,jdbcType=INTEGER}
+    where logid = #{logid,jdbcType=INTEGER}
+  </update>
+</mapper>

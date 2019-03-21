@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.TerminalMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Terminal" >
+    <id column="terid" property="terid" jdbcType="INTEGER" />
+    <result column="tstate" property="tstate" jdbcType="INTEGER" />
+    <result column="tername" property="tername" jdbcType="VARCHAR" />
+    <result column="terpwd" property="terpwd" jdbcType="VARCHAR" />
+    <result column="yid" property="yid" jdbcType="INTEGER" />
+    <result column="tiid" property="tiid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    terid, tstate, tername, terpwd, yid, tiid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from terminal
+    where terid = #{terid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from terminal
+    where terid = #{terid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Terminal" >
+    insert into terminal (terid, tstate, tername, 
+      terpwd, yid, tiid)
+    values (#{terid,jdbcType=INTEGER}, #{tstate,jdbcType=INTEGER}, #{tername,jdbcType=VARCHAR}, 
+      #{terpwd,jdbcType=VARCHAR}, #{yid,jdbcType=INTEGER}, #{tiid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Terminal" >
+    insert into terminal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="terid != null" >
+        terid,
+      </if>
+      <if test="tstate != null" >
+        tstate,
+      </if>
+      <if test="tername != null" >
+        tername,
+      </if>
+      <if test="terpwd != null" >
+        terpwd,
+      </if>
+      <if test="yid != null" >
+        yid,
+      </if>
+      <if test="tiid != null" >
+        tiid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="terid != null" >
+        #{terid,jdbcType=INTEGER},
+      </if>
+      <if test="tstate != null" >
+        #{tstate,jdbcType=INTEGER},
+      </if>
+      <if test="tername != null" >
+        #{tername,jdbcType=VARCHAR},
+      </if>
+      <if test="terpwd != null" >
+        #{terpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="yid != null" >
+        #{yid,jdbcType=INTEGER},
+      </if>
+      <if test="tiid != null" >
+        #{tiid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Terminal" >
+    update terminal
+    <set >
+      <if test="tstate != null" >
+        tstate = #{tstate,jdbcType=INTEGER},
+      </if>
+      <if test="tername != null" >
+        tername = #{tername,jdbcType=VARCHAR},
+      </if>
+      <if test="terpwd != null" >
+        terpwd = #{terpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="yid != null" >
+        yid = #{yid,jdbcType=INTEGER},
+      </if>
+      <if test="tiid != null" >
+        tiid = #{tiid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where terid = #{terid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Terminal" >
+    update terminal
+    set tstate = #{tstate,jdbcType=INTEGER},
+      tername = #{tername,jdbcType=VARCHAR},
+      terpwd = #{terpwd,jdbcType=VARCHAR},
+      yid = #{yid,jdbcType=INTEGER},
+      tiid = #{tiid,jdbcType=INTEGER}
+    where terid = #{terid,jdbcType=INTEGER}
+  </update>
+</mapper>

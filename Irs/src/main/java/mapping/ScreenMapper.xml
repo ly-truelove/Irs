@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ScreenMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Screen" >
+    <id column="scrid" property="scrid" jdbcType="INTEGER" />
+    <result column="scrname" property="scrname" jdbcType="VARCHAR" />
+    <result column="x" property="x" jdbcType="DOUBLE" />
+    <result column="y" property="y" jdbcType="DOUBLE" />
+    <result column="wide" property="wide" jdbcType="DOUBLE" />
+    <result column="high" property="high" jdbcType="DOUBLE" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
+    <result column="savecatalog" property="savecatalog" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    scrid, scrname, x, y, wide, high, picture, savecatalog
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from screen
+    where scrid = #{scrid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from screen
+    where scrid = #{scrid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Screen" >
+    insert into screen (scrid, scrname, x, 
+      y, wide, high, picture, 
+      savecatalog)
+    values (#{scrid,jdbcType=INTEGER}, #{scrname,jdbcType=VARCHAR}, #{x,jdbcType=DOUBLE}, 
+      #{y,jdbcType=DOUBLE}, #{wide,jdbcType=DOUBLE}, #{high,jdbcType=DOUBLE}, #{picture,jdbcType=VARCHAR}, 
+      #{savecatalog,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Screen" >
+    insert into screen
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scrid != null" >
+        scrid,
+      </if>
+      <if test="scrname != null" >
+        scrname,
+      </if>
+      <if test="x != null" >
+        x,
+      </if>
+      <if test="y != null" >
+        y,
+      </if>
+      <if test="wide != null" >
+        wide,
+      </if>
+      <if test="high != null" >
+        high,
+      </if>
+      <if test="picture != null" >
+        picture,
+      </if>
+      <if test="savecatalog != null" >
+        savecatalog,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scrid != null" >
+        #{scrid,jdbcType=INTEGER},
+      </if>
+      <if test="scrname != null" >
+        #{scrname,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        #{x,jdbcType=DOUBLE},
+      </if>
+      <if test="y != null" >
+        #{y,jdbcType=DOUBLE},
+      </if>
+      <if test="wide != null" >
+        #{wide,jdbcType=DOUBLE},
+      </if>
+      <if test="high != null" >
+        #{high,jdbcType=DOUBLE},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="savecatalog != null" >
+        #{savecatalog,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Screen" >
+    update screen
+    <set >
+      <if test="scrname != null" >
+        scrname = #{scrname,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        x = #{x,jdbcType=DOUBLE},
+      </if>
+      <if test="y != null" >
+        y = #{y,jdbcType=DOUBLE},
+      </if>
+      <if test="wide != null" >
+        wide = #{wide,jdbcType=DOUBLE},
+      </if>
+      <if test="high != null" >
+        high = #{high,jdbcType=DOUBLE},
+      </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="savecatalog != null" >
+        savecatalog = #{savecatalog,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where scrid = #{scrid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Screen" >
+    update screen
+    set scrname = #{scrname,jdbcType=VARCHAR},
+      x = #{x,jdbcType=DOUBLE},
+      y = #{y,jdbcType=DOUBLE},
+      wide = #{wide,jdbcType=DOUBLE},
+      high = #{high,jdbcType=DOUBLE},
+      picture = #{picture,jdbcType=VARCHAR},
+      savecatalog = #{savecatalog,jdbcType=VARCHAR}
+    where scrid = #{scrid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.JurclassMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Jurclass" >
+    <id column="jcid" property="jcid" jdbcType="INTEGER" />
+    <result column="classname" property="classname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    jcid, classname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from jurclass
+    where jcid = #{jcid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jurclass
+    where jcid = #{jcid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Jurclass" >
+    insert into jurclass (jcid, classname)
+    values (#{jcid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Jurclass" >
+    insert into jurclass
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jcid != null" >
+        jcid,
+      </if>
+      <if test="classname != null" >
+        classname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jcid != null" >
+        #{jcid,jdbcType=INTEGER},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Jurclass" >
+    update jurclass
+    <set >
+      <if test="classname != null" >
+        classname = #{classname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where jcid = #{jcid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Jurclass" >
+    update jurclass
+    set classname = #{classname,jdbcType=VARCHAR}
+    where jcid = #{jcid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.RssMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Rss" >
+    <id column="rssid" property="rssid" jdbcType="INTEGER" />
+    <result column="rssname" property="rssname" jdbcType="VARCHAR" />
+    <result column="refresh" property="refresh" jdbcType="INTEGER" />
+    <result column="site" property="site" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rssid, rssname, refresh, site
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rss
+    where rssid = #{rssid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rss
+    where rssid = #{rssid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.Rss" >
+    insert into rss (rssid, rssname, refresh, 
+      site)
+    values (#{rssid,jdbcType=INTEGER}, #{rssname,jdbcType=VARCHAR}, #{refresh,jdbcType=INTEGER}, 
+      #{site,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.Rss" >
+    insert into rss
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rssid != null" >
+        rssid,
+      </if>
+      <if test="rssname != null" >
+        rssname,
+      </if>
+      <if test="refresh != null" >
+        refresh,
+      </if>
+      <if test="site != null" >
+        site,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rssid != null" >
+        #{rssid,jdbcType=INTEGER},
+      </if>
+      <if test="rssname != null" >
+        #{rssname,jdbcType=VARCHAR},
+      </if>
+      <if test="refresh != null" >
+        #{refresh,jdbcType=INTEGER},
+      </if>
+      <if test="site != null" >
+        #{site,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.Rss" >
+    update rss
+    <set >
+      <if test="rssname != null" >
+        rssname = #{rssname,jdbcType=VARCHAR},
+      </if>
+      <if test="refresh != null" >
+        refresh = #{refresh,jdbcType=INTEGER},
+      </if>
+      <if test="site != null" >
+        site = #{site,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rssid = #{rssid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Rss" >
+    update rss
+    set rssname = #{rssname,jdbcType=VARCHAR},
+      refresh = #{refresh,jdbcType=INTEGER},
+      site = #{site,jdbcType=VARCHAR}
+    where rssid = #{rssid,jdbcType=INTEGER}
+  </update>
+</mapper>

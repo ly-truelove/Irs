@@ -1,0 +1,44 @@
+
+.box1{
+	width: 150px;
+	height: 400px;
+	float: left;
+	margin: 10% 3% 3% 15%;
+}
+.box2{
+	width: 600px;
+	height: 450px;
+	float: left;
+	margin: 10% 3% 3% 10%;
+	background-image: url(../img/content_bg.jpg);
+	background-repeat:no-repeat;
+	background-size:100% 100%;
+}
+.box11{
+	height: 100px;
+	width: 150px;
+	background: url(../img/left_1.png);
+	 background-repeat:no-repeat;
+	 background-size:100% 100%;
+}
+.box21 .box22{
+	float: none;
+}
+.box211{
+	float: left;
+	margin: 10% 30px 30px 10%;
+}
+.box212{
+	float: left;
+	margin: 10% 30px 30px 10%;
+}
+.box221{
+	float: left;
+	margin: 10% 30px 30px 10%;
+	clear: both;
+}
+.box222{
+	float: left;
+	margin: 10% 30px 30px 10%;
+}
+

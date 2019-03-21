@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.InformMapper" >
+  <resultMap id="BaseResultMap" type="pojo.Inform" >
+    <id column="infoid" property="infoid" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="startTime" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="stopTime" property="stoptime" jdbcType="TIMESTAMP" />
+    <result column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="sids" property="sids" jdbcType="INTEGER" />
+    <result column="creattime" property="creattime" jdbcType="TIMESTAMP" />
+    <result column="infostate" property="infostate" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="pojo.InformWithBLOBs" extends="BaseResultMap" >
+    <result column="context" property="context" jdbcType="LONGVARCHAR" />
+    <result column="contexts" property="contexts" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    infoid, title, startTime, stopTime, sid, sids, creattime, infostate
+  </sql>
+  <sql id="Blob_Column_List" >
+    context, contexts
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from inform
+    where infoid = #{infoid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from inform
+    where infoid = #{infoid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pojo.InformWithBLOBs" >
+    insert into inform (infoid, title, startTime, 
+      stopTime, sid, sids, 
+      creattime, infostate, context, 
+      contexts)
+    values (#{infoid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{stoptime,jdbcType=TIMESTAMP}, #{sid,jdbcType=INTEGER}, #{sids,jdbcType=INTEGER}, 
+      #{creattime,jdbcType=TIMESTAMP}, #{infostate,jdbcType=INTEGER}, #{context,jdbcType=LONGVARCHAR}, 
+      #{contexts,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="pojo.InformWithBLOBs" >
+    insert into inform
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="infoid != null" >
+        infoid,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="stoptime != null" >
+        stopTime,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="sids != null" >
+        sids,
+      </if>
+      <if test="creattime != null" >
+        creattime,
+      </if>
+      <if test="infostate != null" >
+        infostate,
+      </if>
+      <if test="context != null" >
+        context,
+      </if>
+      <if test="contexts != null" >
+        contexts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="infoid != null" >
+        #{infoid,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stoptime != null" >
+        #{stoptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="sids != null" >
+        #{sids,jdbcType=INTEGER},
+      </if>
+      <if test="creattime != null" >
+        #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="infostate != null" >
+        #{infostate,jdbcType=INTEGER},
+      </if>
+      <if test="context != null" >
+        #{context,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contexts != null" >
+        #{contexts,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="pojo.InformWithBLOBs" >
+    update inform
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="stoptime != null" >
+        stopTime = #{stoptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="sids != null" >
+        sids = #{sids,jdbcType=INTEGER},
+      </if>
+      <if test="creattime != null" >
+        creattime = #{creattime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="infostate != null" >
+        infostate = #{infostate,jdbcType=INTEGER},
+      </if>
+      <if test="context != null" >
+        context = #{context,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="contexts != null" >
+        contexts = #{contexts,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where infoid = #{infoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="pojo.InformWithBLOBs" >
+    update inform
+    set title = #{title,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      stopTime = #{stoptime,jdbcType=TIMESTAMP},
+      sid = #{sid,jdbcType=INTEGER},
+      sids = #{sids,jdbcType=INTEGER},
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      infostate = #{infostate,jdbcType=INTEGER},
+      context = #{context,jdbcType=LONGVARCHAR},
+      contexts = #{contexts,jdbcType=LONGVARCHAR}
+    where infoid = #{infoid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="pojo.Inform" >
+    update inform
+    set title = #{title,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      stopTime = #{stoptime,jdbcType=TIMESTAMP},
+      sid = #{sid,jdbcType=INTEGER},
+      sids = #{sids,jdbcType=INTEGER},
+      creattime = #{creattime,jdbcType=TIMESTAMP},
+      infostate = #{infostate,jdbcType=INTEGER}
+    where infoid = #{infoid,jdbcType=INTEGER}
+  </update>
+</mapper>

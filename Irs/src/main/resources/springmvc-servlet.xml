@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        
+   <context:component-scan base-package="com.entor.appsys.controller"/>
+   
+   <mvc:annotation-driven>
+        <!-- 数据格式化 -->
+   		<mvc:message-converters>
+   		    <!--数据类型的转换  -->
+   			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+   				<property name="supportedMediaTypes">
+   					<list>
+   						<value>application/json;charset=UTF-8</value>
+   					</list>
+   				</property>
+   			</bean>
+   			<!-- fastJson  引入 JSON对象的转换 -->
+   			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+   				<property name="supportedMediaTypes">
+   					<list>
+   						<value>text/html;charset=UTF-8</value>
+   						<value>application/json</value>
+   					</list>
+   				</property>
+   				<!-- 日期格式化 -->
+   				<property name="features">
+   					<list>
+   						<value>WriteDateUseDateFormat</value>
+   					</list>
+   				</property>
+   			</bean>
+   		</mvc:message-converters>
+   </mvc:annotation-driven>
+   <!-- web加载外部资源 -->
+   <mvc:resources location="/statics/" mapping="/statics/**"></mvc:resources>
+    
+    <!-- 配置多视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+        <property name="favorParameter" value="true"/> 
+        <property name="defaultContentType" value="text/html" /> 
+        <property name="mediaTypes">
+            <map>
+            	<entry key="html" value="text/html; charset=UTF-8"/>
+                <entry key="json" value="application/json; charset=UTF-8"/>
+                <entry key="xml" value="application/xml; charset=UTF-8"/>
+            </map>
+        </property>
+        <property name="viewResolvers">
+            <list>
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+				   <property name="prefix" value="/WEB-INF/jsp/"/>
+				   <property name="suffix" value=".jsp"/>
+			   </bean>
+            </list>
+        </property>
+    </bean>
+ 
+	<!-- 配置interceptors -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/manager/backend/**"/>
+			<mvc:mapping path="/dev/flatform/**"/>
+			<bean class="com.entor.appsys.interceptor.SysInterceptor"/>
+		</mvc:interceptor>		
+	</mvc:interceptors>
+	
+	<!-- 配置文件上传  MultipartResolver-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="500000000"/><!-- 全局的设置   不但包含图片的大小还有apk的大小 -->
+		<property name="defaultEncoding" value="UTF-8"/><!-- 必须和上传文件页面的字符集一致 -->
+	</bean>
+	
+</beans>   
